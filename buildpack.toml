@@ -5,7 +5,7 @@ name = "NeetoDeploy SQLite Buildpack"
 description = "A Cloud Native Buildpack that installs sqlite3 for use in Rails and Node.js apps."
 
 [metadata]
-homepage = "https://github.com/bigbinary/neeto-deploy-web"
+homepage = "https://github.com/bigbinary/neeto-deploy-sqlite-buildpack"
 authors = ["NeetoDeploy Team <support@neeto.com>"]
 
 [[stacks]]
