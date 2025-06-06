@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Log function for consistent output
+log() {
+  echo "[sqlite-buildpack] $1"
+}
+
+log "Updating package lists..."
+if ! apt-get update -y; then
+  log "Failed to update package lists" >&2
+  exit 1
+fi
+
+log "Installing sqlite3..."
+if ! apt-get install -y sqlite3 libsqlite3-dev; then
+  log "Failed to install sqlite3" >&2
+  exit 1
+fi
+
+log "Verifying sqlite3 installation..."
+if ! command -v sqlite3 >/dev/null; then
+  log "sqlite3 not found after installation" >&2
+  exit 1
+fi
+
+log "sqlite3 successfully installed. Version: $(sqlite3 --version)"
+
+exit 0

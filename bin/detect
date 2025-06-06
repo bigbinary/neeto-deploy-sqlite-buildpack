@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+log() {
+  echo "[sqlite-buildpack] $1"
+}
+
+# Check for sqlite3 in Gemfile or Gemfile.lock
+if [ -f Gemfile ] && grep -i -q 'sqlite3' Gemfile; then
+  log "sqlite3 detected in Gemfile"
+  exit 0
+fi
+if [ -f Gemfile.lock ] && grep -i -q 'sqlite3' Gemfile.lock; then
+  log "sqlite3 detected in Gemfile.lock"
+  exit 0
+fi
+
+# Check for sqlite3 in package.json, package-lock.json, or yarn.lock
+if [ -f package.json ] && grep -i -q 'sqlite3' package.json; then
+  log "sqlite3 detected in package.json"
+  exit 0
+fi
+if [ -f package-lock.json ] && grep -i -q 'sqlite3' package-lock.json; then
+  log "sqlite3 detected in package-lock.json"
+  exit 0
+fi
+if [ -f yarn.lock ] && grep -i -q 'sqlite3' yarn.lock; then
+  log "sqlite3 detected in yarn.lock"
+  exit 0
+fi
+
+log "sqlite3 not detected. Skipping buildpack."
+exit 100

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+log() {
+  echo "[sqlite-buildpack] $1"
+}
+
+log "Release phase (no-op for most CNB workflows)"
+
+exit 0
